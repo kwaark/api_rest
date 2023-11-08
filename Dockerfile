@@ -1,10 +1,15 @@
 # api_rest/Dockerfile
-FROM base_image:latest
+FROM kwaark/base_image:v1.0
 
+# Define working directory
 WORKDIR /app
 
-# Copy project files to the /app directory
-COPY . .
+# Install git
+RUN apt-get update && \
+    apt-get install -y git
+
+# Clone the repository
+RUN git clone https://github.com/kwaark/api_rest.git .
 
 # Install dependencies
 RUN poetry config virtualenvs.create false && \
